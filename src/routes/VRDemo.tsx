@@ -10,7 +10,7 @@ import 'aframe-particle-system-component';
 import {Entity, Scene} from 'aframe-react';
 
 const dayOfWeek = modifyAttribute(
-    Md.DateDatasets.DepTime.DepTimeDayOfWeek.Default,
+    Md.DateDatasets.DepTime.DepTimeMonthOfYear.Default,
     (a) => a.alias("Department time(Day of Week)")
 );
 const DepDelaySum = modifyMeasure(
@@ -38,6 +38,7 @@ const VRDemo: React.FC = () => {
                 ErrorComponent={CustomErrorComponent}
             >
                 {({ result }) => {
+                    const start_x = -5;
                     const slices = result!.data().slices().toArray();
                     //const series = result!.data().series().toArray();
                     const bars = slices?.map((value, index) => {
@@ -47,7 +48,7 @@ const VRDemo: React.FC = () => {
                             <Entity
                                 geometry={{primitive: 'box'}}
                                 material={{color: "rgb(20,178,226)"}}
-                                position={{x: index, y: 0, z: -10}}
+                                position={{x: start_x + index, y: 2, z: -3}}
                                 scale={scale}
                             />
                         );
@@ -59,8 +60,10 @@ const VRDemo: React.FC = () => {
                             <Entity light={{type: 'point'}}/>
                             <Entity gltf-model={{src: 'virtualcity.gltf'}}/>
                             <Entity
-                                text={{value: 'Flight Depart Delays in Week'}}
-                                position={{x: 0, y: 20, z: 10}}
+                                geometry="primitive: plane; height: auto; width: auto"
+                                material="color: blue"
+                                text="width: 8; value: Flight Depart Delays in Week."
+                                position={{x: 2, y: -2, z: 2}}
                             />
                         </Scene>
                     )

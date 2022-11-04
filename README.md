@@ -10,13 +10,12 @@ The repository is linked with [render.com](render.com) provider. A new commit in
 
 End users with VR headsets simply open a browser, go to the [target site](https://analytics-vr.onrender.com/) and play with demos.
 
-## UI.SDK
+## Static examples
+Stored in [static_examples](static_examples) folder, index.html is the crossroad.
 
-Besides static html files containing a-frame demos, I built an application utilizing GoodData UI.SDK.
-It is stored in [ui.sdk](ui.sdk) folder.
+## UI.SDK
 Simply run:
 ```shell
-cd ui.sdk
 yarn install
 yarn start
 ```
