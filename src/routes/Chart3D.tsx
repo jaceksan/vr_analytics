@@ -30,7 +30,7 @@ const CustomErrorComponent = ({ error }: IExecuteErrorComponentProps) => (
     />
 );
 
-const Chart3D_v2: React.FC = () => {
+const Chart3D: React.FC = () => {
     return (
         <Page>
             <div><h1>Flight Depart Delays in Time</h1></div>
@@ -106,4 +106,4 @@ function generateDataLines(slices: IDataSlice[]) {
     return data;
 }
 
-export default Chart3D_v2;
+export default Chart3D;

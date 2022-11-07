@@ -20,11 +20,8 @@ const Links: React.FC = () => {
             <NavLink to={"/custom_execution"} className={styles.Link} activeClassName={styles.LinkActive} exact>
                 Custom Execution
             </NavLink>
-            <NavLink to={"/chart3d_v1"} className={styles.Link} activeClassName={styles.LinkActive} exact>
-                3D chart v1
-            </NavLink>
-            <NavLink to={"/chart3d_v2"} className={styles.Link} activeClassName={styles.LinkActive} exact>
-                3D chart v2
+            <NavLink to={"/chart3d"} className={styles.Link} activeClassName={styles.LinkActive} exact>
+                3D chart
             </NavLink>
             <NavLink to={"/vr_demo"} className={styles.Link} activeClassName={styles.LinkActive} exact>
                 VR Demo
