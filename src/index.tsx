@@ -1,4 +1,5 @@
 import "react-app-polyfill/stable";
+import React from "react";
 import ReactDOM from "react-dom";
 
 import App from "./App";
@@ -14,11 +15,14 @@ import "@gooddata/sdk-ui-kit/styles/css/main.css";
 import "@gooddata/sdk-ui-pivot/styles/css/main.css";
 import "@gooddata/sdk-ui-dashboard/styles/css/main.css";
 
+const root = document.createElement("div");
+root.className = "root";
+document.body.appendChild(root);
 ReactDOM.render(
     <AppProviders>
         <App />
     </AppProviders>,
-    document.getElementById("root"),
+    root,
 );
 
 // If you want your app to work offline and load faster, you can change

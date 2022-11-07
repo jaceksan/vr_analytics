@@ -143,7 +143,7 @@ module.exports = async (env, argv) => {
                 stats: "errors-only",
             },
             historyApiFallback: true,
-            port: 8999,
+            port: 8443,
             liveReload: true,
             proxy,
         },
