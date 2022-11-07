@@ -39,16 +39,19 @@ const VRDemo: React.FC = () => {
             >
                 {({ result }) => {
                     const start_x = -5;
+                    const start_y = 3;
                     const slices = result!.data().slices().toArray();
+                    const max_value = Math.max(...slices.map(value => Number(value.dataPoints()[0].formattedValue())))
                     //const series = result!.data().series().toArray();
                     const bars = slices?.map((value, index) => {
+                        const value_diff = max_value - Number(value.dataPoints()[0].formattedValue())
                         const scale = `0.5 ${value.dataPoints()[0].formattedValue()} 1`
                         console.log(`scale=${scale}`)
                         return (
                             <Entity
                                 geometry={{primitive: 'box'}}
                                 material={{color: "rgb(20,178,226)"}}
-                                position={{x: start_x + index, y: 2, z: -3}}
+                                position={{x: start_x + index, y: start_y - value_diff/2, z: -12}}
                                 scale={scale}
                             />
                         );
@@ -62,8 +65,8 @@ const VRDemo: React.FC = () => {
                             <Entity
                                 geometry="primitive: plane; height: auto; width: auto"
                                 material="color: blue"
-                                text="width: 8; value: Flight Depart Delays in Week."
-                                position={{x: 2, y: -2, z: 2}}
+                                text="width: 8; align: center; value: Flight Depart Delays in Week."
+                                position={{x: 0, y: -1, z: -6}}
                             />
                         </Scene>
                     )
