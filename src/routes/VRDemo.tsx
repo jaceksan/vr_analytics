@@ -10,7 +10,7 @@ import 'aframe-particle-system-component';
 import {Entity, Scene} from 'aframe-react';
 
 const dayOfWeek = modifyAttribute(
-    Md.DateDatasets.DepTime.DepTimeMonthOfYear.Default,
+    Md.DateDatasets.DepTime.DepTimeDayOfWeek.Default,
     (a) => a.alias("Department time(Day of Week)")
 );
 const DepDelaySum = modifyMeasure(
@@ -26,7 +26,15 @@ const CustomErrorComponent = ({ error }: IExecuteErrorComponentProps) => (
     />
 );
 
+const handleClick = () => {
+    console.log('Clicked!');
+}
+
 //const colors = ["rgb(20,178,226)", "rgb(0,193,141)", "rgb(229,77,66)"];
+
+function getFormattedValue(value: any) {
+    return value.dataPoints()[0].formattedValue()
+}
 
 const VRDemo: React.FC = () => {
     return (
@@ -41,11 +49,12 @@ const VRDemo: React.FC = () => {
                     const start_x = -5;
                     const start_y = 3;
                     const slices = result!.data().slices().toArray();
-                    const max_value = Math.max(...slices.map(value => Number(value.dataPoints()[0].formattedValue())))
+                    const max_value = Math.max(...slices.map(value => Number(getFormattedValue(value))))
                     //const series = result!.data().series().toArray();
                     const bars = slices?.map((value, index) => {
-                        const value_diff = max_value - Number(value.dataPoints()[0].formattedValue())
-                        const scale = `0.5 ${value.dataPoints()[0].formattedValue()} 1`
+                        const formatted_value = getFormattedValue(value)
+                        const value_diff = max_value - Number(formatted_value)
+                        const scale = `0.5 ${formatted_value} 1`
                         console.log(`scale=${scale}`)
                         return (
                             <Entity
@@ -53,20 +62,60 @@ const VRDemo: React.FC = () => {
                                 material={{color: "rgb(20,178,226)"}}
                                 position={{x: start_x + index, y: start_y - value_diff/2, z: -12}}
                                 scale={scale}
+                                events={{
+                                    click: handleClick
+                                }}
+                            />
+                        );
+                    });
+                    const texts_values = slices?.map((value, index) => {
+                        const formatted_value = getFormattedValue(value)
+                        const info_text = `width: 6; align: center; value: ${formatted_value}`
+                        return (
+                            <Entity
+                                geometry={{primitive: 'plane', height: 1, width: 3}}
+                                material="color: red"
+                                text={info_text}
+                                position={{x: start_x + index, y: start_y + max_value/2 + 1, z: -12}}
+                            />
+                        );
+                    });
+                    const texts_attribute = slices?.map((value, index) => {
+                        const info_text = `width: 6; align: center; value: ${value.sliceTitles()[0]}`
+                        return (
+                            <Entity
+                                geometry={{primitive: 'plane', height: 1, width: 3}}
+                                material="color: red"
+                                text={info_text}
+                                position={{x: start_x + index, y: -3, z: -12}}
                             />
                         );
                     });
                     return (
                         <Scene>
+                            <Entity
+                                geometry={{primitive: 'plane', height: 1, width: 3}}
+                                material="color: red"
+                                text="width: 6; align: center; value: Day in Week"
+                                position={{x: start_x - 2, y: -3, z: -12}}
+                            />
+                            {texts_values}
                             {bars}
-                            <Entity particle-system={{preset: 'snow'}}/>
+                            <Entity
+                                geometry={{primitive: 'plane', height: 1, width: 3}}
+                                material="color: red"
+                                text="width: 6; align: center; value: AVG delay in minutes"
+                                position={{x: start_x - 2, y: start_y + max_value/2 + 1, z: -12}}
+                            />
+                            {texts_attribute}
+                            <Entity particle-system={{preset: 'snow', particleCount: 5000}}/>
                             <Entity light={{type: 'point'}}/>
                             <Entity gltf-model={{src: 'virtualcity.gltf'}}/>
                             <Entity
                                 geometry="primitive: plane; height: auto; width: auto"
                                 material="color: blue"
                                 text="width: 8; align: center; value: Flight Depart Delays in Week."
-                                position={{x: 0, y: -1, z: -6}}
+                                position={{x: -1, y: -2, z: -6}}
                             />
                         </Scene>
                     )
