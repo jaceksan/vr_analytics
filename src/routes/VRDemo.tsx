@@ -8,6 +8,12 @@ import 'aframe';
 import 'aframe-particle-system-component';
 // @ts-ignore
 import {Entity, Scene} from 'aframe-react';
+/* Other options:
+https://adrixp.github.io/aframe-charts-component/examples/popup/code.html
+https://github.com/adrixp/aframe-charts-component/blob/master/src/index.js
+https://adrixp.github.io/aframe-charts-component/examples/barChart/
+https://github.com/IshaanVasant/VR-Viz/tree/master
+ */
 
 const attributeSlice = modifyAttribute(
     Md.DateDatasets.DepTime.DepTimeMonthOfYear.Default,
