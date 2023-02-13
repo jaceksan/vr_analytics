@@ -5,7 +5,7 @@ import range from "lodash/range";
 import zip from "lodash/zip";
 import chroma from "chroma-js";
 
-const WORKSPACE = "faa_development";
+const WORKSPACE = "faa_production";
 const INSIGHT_REF = idRef("flight_stats_in_time", "insight");
 
 const MIN_X_DATA = 0.5;
