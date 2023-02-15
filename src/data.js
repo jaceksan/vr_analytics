@@ -23,13 +23,13 @@ const MAX_Z_DATA = 3.5;
 const MIN_RADIUS = 0.05;
 const MAX_RADIUS = 0.2;
 
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
 const backend = tigerFactory({
     hostname: "https://demo-cicd.cloud.gooddata.com",
 }).withAuthentication(
     new TigerTokenAuthProvider(process.env.TIGER_API_TOKEN)
 );
-
-const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const main = async () => {
     const insight = await backend.workspace(WORKSPACE).insights().getInsight(INSIGHT_REF);
