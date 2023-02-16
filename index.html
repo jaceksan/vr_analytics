@@ -17,6 +17,7 @@
         <a-scene id="scene" id="scene" cursor="rayOrigin: mouse">
             <a-entity environment="preset: yavapai"></a-entity>
             <a-sky color="white"></a-sky>
+            <a-entity position="-1.5 2 5" text="value: Data points:\n\nRadius represents flight distance.\nColor represents flight delay.; width: 3; align: left; side: double; color: black" rotation="0 -180 0"></a-entity>
             <a-entity bind-for="for: point; in: executionData; key: hash; updateInPlace: true">
                 <template>
                     <a-sphere
